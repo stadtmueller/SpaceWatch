@@ -1,0 +1,11 @@
+src/sw.py:
+
+	Main file. Put in autostart
+
+src/clearFiles.py:
+
+	Clear log file
+
+install.txt:
+
+	How to install

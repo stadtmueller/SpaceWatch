@@ -1,0 +1,32 @@
+1. Create directories
+
+     'sudo mkdir (FTPDIR)/SpcWtch/'
+     'mkdir /home/pi/SpcWtch'
+
+2. Move .py files to /home/pi/SpcWtch
+
+     'mv *.py /home/pi/SpcWtch/'
+
+3. Create empty files avg.txt and mesg.txt in FTP-directorie
+
+     'sudo touch FTPDIR/SpcWtch/avg.txt'
+     'sudo touch FTPDIR/SpcWtch/mesg.txt'
+
+4. Run 'sudo crontab -e' and add the line
+
+     '@reboot /home/pi/SpcWtch/sw.py'
+
+5. Try to run the script
+
+     'sudo /home/pi/SpcWtch/sw.py'
+
+   If it fails try 'sudo python3 /home/pi/SpcWtch/sw.py' and correct the line in crontab
+
+6. Read out the output files
+
+     'cat /FTPDIR/SpcWtch/mesg.txt'
+     'cat /FTPDIR/SpcWtch/avg.txt'
+
+7. Try to clear those files
+
+     'sudo /home/pi/SpcWtch/clearFiles.py'
