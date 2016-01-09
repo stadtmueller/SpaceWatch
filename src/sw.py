@@ -13,12 +13,6 @@ if os.getuid() != 0:
   print( "      Versuch 'sudo python3 sw.py'")
   exit( 1 )
 
-cache = apt.Cache()
-if not cache[ 'mailutils' ].is_installed:
-  print( "[ERR] sendmail is not installed!" )
-  print( "      Install with 'sudo apt-get install sendmail'" )
-  exit( 2 )
-
 # END INIT
 
 #----------------------------------------------------------------------
