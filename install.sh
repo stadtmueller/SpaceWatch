@@ -8,7 +8,7 @@ if [ $( id -u ) -gt 0 ]
 fi
 
     
-echo "Enter FTP-Directorie: ";
+echo "Enter FTP-Directory ( No '/' at the end ): ";
 read ftpDir;
 logPath = "$ftpDir/SpcWtch/"
 swHome = "$HOME/SpcWtch/"
@@ -27,7 +27,7 @@ touch $logPath/mesg.txt;
 
 
 echo "Installing ProFTP...";
-apt-get install proftp;
+apt-get install proftpd;
 
 
 echo "Configuring ProFTP...";
@@ -58,7 +58,3 @@ echo "Restarting FTP-Server..."
 echo "Setup finished. FTP-Server is ready to use."
 ip=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
 echo "Try to call ftp://$ip from your browser."
-
-
-
-
