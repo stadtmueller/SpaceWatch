@@ -3,6 +3,7 @@
 import os
 import apt
 import time
+import smtplib
 
 #----------------------------------------------------------------------
 
@@ -32,13 +33,31 @@ avg = 0
 messageTemp = "Raspberry Pi FTP-Server: Mindestwert an freiem Speicher unterschritten!\n" \
               "Verfuegbarer Speicher: %s kB.\n\n" \
               "Es koennen nur noch ca. %d Bilder gemacht werden."
-commandTemp = "echo '%s' | sendmail -s 'Raspberry Pi FTP-Server' timsta2000@googlemail.com"
+mailingList = [ "timsta2000@googlemail.com" ]
 
 # END VARIABLES
 
 #----------------------------------------------------------------------
 
 # FUNCTIONS
+def sendEmail( mailingList, message ):
+    login = "XXXX"
+    password = "XXXX"
+    smtpserver = "smtp.gmail.com:587"
+    mailer = "Raspberry Pi"
+
+    header  = "From: %s\n" % mailer
+    mailingList = ",".join( mailingList )
+    header += "To: %s\n" % mailingList
+    header += "Subject: Raspberry Pi FTP-Server: No space available\n\n"
+    message = header + message
+
+    server = smtplib.SMTP( smtpserver )
+    server.starttls()
+    server.login( login, password )
+    server.sendmail( mailer, mailingList, message )
+    server.quit()
+
 # In Bytes
 def getSpcAvail():
     stfs = os.statvfs( "/" )
@@ -97,8 +116,8 @@ try:
                 avg = toKilo( getAvgFileSize() )
             log( "Average picture size: %fkB" % avg )
             message = messageTemp % ( toKilo( spcAvail ), (spcAvail / avg) )
-            command = commandTemp % message
-            #os.system( command ) 
+            sendEmail( mailingList, message )
+            log( "Email sent." )
 
             log( "Exiting normal." )
             log( "------------------------------------" )
