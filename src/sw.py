@@ -129,7 +129,7 @@ try:
             avg = toKilo( getAvgFileSize() )
             log( "New average picture size is: %f kB" % avg )
             log( "%d pictures could be taken." % (spcAvail / avg) )
-            time.sleep( 30 * 60 * 60 )
+            time.sleep( 30 * 60 )
         time.sleep( 1 )
 except KeyboardInterrupt:
     print( "\n" )
