@@ -66,6 +66,9 @@ def getAvgFileSize():
                                         if os.path.isfile( f ):
                                                 totalSize += os.path.getsize( f )
                                                 totalCount += 1
+    log( "Total data size: %fkB." % toKilo( totalSize ) )
+    log( "%d pictures have been taken." % totalCount )
+
     return totalSize / totalCount
 
 def toKilo( byte ):
