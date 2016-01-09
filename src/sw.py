@@ -106,6 +106,7 @@ def log( msg ):
 try:
     log( "Starting." )
     while availableSpace:
+        log( "..............New cycle.............."
         spcAvail = getSpcAvail()
         log( "Free disk space: %fB" % spcAvail )
         if( spcAvail < minSpcAvail ):
@@ -120,7 +121,7 @@ try:
             log( "Email sent." )
 
             log( "Exiting normal." )
-            log( "------------------------------------" )
+            log( "-------------------------------------" )
             exit( 0 )
         else:
             # Recalculate average picture size
@@ -134,7 +135,7 @@ try:
 except KeyboardInterrupt:
     print( "\n" )
     log( "Received KeyboardInterrupt. Exiting." )
-    log( "------------------------------------" ) 
+    log( "-------------------------------------" ) 
     logFile.close()
     exit( 0 )
 
