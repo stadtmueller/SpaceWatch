@@ -100,7 +100,7 @@ def log( msg ):
 try:
     log( "Starting." )
     while availableSpace:
-        log( "..............New cycle.............."
+        log( "..............New cycle.............." )
         spcAvail = getSpcAvail()
         log( "Free disk space: %fB" % spcAvail )
         if( spcAvail < minSpcAvail ):
