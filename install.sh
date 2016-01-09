@@ -10,8 +10,8 @@ fi
     
 echo "Enter FTP-Directory ( No '/' at the end ): ";
 read ftpDir;
-logPath = "$ftpDir/SpcWtch/"
-swHome = "$HOME/SpcWtch/"
+logPath="$ftpDir/SpcWtch/"
+swHome="$HOME/SpcWtch/"
 
 
 echo "Creating directories...";
@@ -21,8 +21,8 @@ mkdir $swHome;
 
 
 echo "Copy Files...";
-cp ./clearFiles.py $swHome;
-cp ./sw.py $swHome;
+cp src/clearFiles.py $swHome;
+cp src/sw.py $swHome;
 touch $logPath/mesg.txt;
 
 
@@ -31,7 +31,7 @@ apt-get install proftpd;
 
 
 echo "Configuring ProFTP...";
-file = /etc/proftpd/proftpd.conf
+file=/etc/proftpd/proftpd.conf
 echo "DefaultRoot ~" >> $file;
 echo "AuthOrder              mod_auth_file.c  mod_auth_unix.c" >> $file;
 echo "AuthUserFile /etc/proftpd/ftpd.passwd" >> $file;
