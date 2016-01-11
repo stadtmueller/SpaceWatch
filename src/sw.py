@@ -18,15 +18,16 @@ if os.getuid() != 0:
 #----------------------------------------------------------------------
 
 # VARIABLES
-minSpcAvail = 15625 # In Bytes ( == 5MB )
+minSpcAvail = 5000000 # In Bytes ( 5.000.000B = 5MB )
 logFile = open( "/home/pi/FTP/SpcWtch/mesg.txt", "a" )
-ftpDir = "/home/pi/FTP/"   # !!!  Must end with '/'
 availableSpace = True
 spcAvail = 0
 avg = 0
-messageTemp = "Raspberry Pi FTP-Server: Mindestwert an freiem Speicher unterschritten!\n" \
-              "Verfuegbarer Speicher: %s kB.\n\n" \
-              "Es koennen nur noch ca. %d Bilder gemacht werden."
+messageTemp = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" \
+              "Available space: %s kB.\n\n" \
+              "Only %d pictures can be taken."
+
+ftpDir = "/home/pi/FTP/" # Must end with '/' !
 mailingList = [ "" ]
 
 # END VARIABLES
