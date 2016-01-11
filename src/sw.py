@@ -27,7 +27,7 @@ avg = 0
 messageTemp = "Raspberry Pi FTP-Server: Mindestwert an freiem Speicher unterschritten!\n" \
               "Verfuegbarer Speicher: %s kB.\n\n" \
               "Es koennen nur noch ca. %d Bilder gemacht werden."
-mailingList = [ "timsta2000@googlemail.com" ]
+mailingList = [ "" ]
 
 # END VARIABLES
 
