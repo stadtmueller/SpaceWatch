@@ -102,14 +102,15 @@ try:
     while availableSpace:
         log( "..............New cycle.............." )
         spcAvail = getSpcAvail()
-        log( "Free disk space: %fB" % spcAvail )
+        avg = getAvgFileSize()
+        log( "Free disk space: %fkB" % toKilo( spcAvail ) )
+        log( "New average picture size is: %f kB" % toKilo( avg ) )
+        log( "%d pictures could be taken." % (spcAvail / avg) )
+
         if( spcAvail < minSpcAvail ):
             # Drive is going to have no available space / Send email
             log( "No space available anymore." )
             availableSpace = False
-            if avg == 0:
-                avg = toKilo( getAvgFileSize() )
-            log( "Average picture size: %fkB" % avg )
             message = messageTemp % ( toKilo( spcAvail ), (spcAvail / avg) )
             sendEmail( mailingList, message )
             log( "Email sent." )
@@ -118,12 +119,7 @@ try:
             log( "-------------------------------------" )
             exit( 0 )
         else:
-            # Recalculate average picture size
       	    # Sleep half an hour
-            log( "Recalculate average picture size." )
-            avg = toKilo( getAvgFileSize() )
-            log( "New average picture size is: %f kB" % avg )
-            log( "%d pictures could be taken." % (spcAvail / avg) )
             time.sleep( 30 * 60 )
         time.sleep( 1 )
 except KeyboardInterrupt:
