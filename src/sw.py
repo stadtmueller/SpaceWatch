@@ -18,8 +18,6 @@ if os.getuid() != 0:
 #----------------------------------------------------------------------
 
 # VARIABLES
-minSpcAvail = 5000000 # In Bytes ( 5.000.000B = 5MB )
-logFile = open( "/home/pi/FTP/SpcWtch/mesg.txt", "a" )
 availableSpace = True
 spcAvail = 0
 avg = 0
@@ -27,8 +25,22 @@ messageTemp = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" 
               "Available space: %s kB.\n\n" \
               "Only %d pictures can be taken."
 
-ftpDir = "/home/pi/FTP/" # Must end with '/' !
-mailingList = [ "" ]
+d = {}
+with open( "sw.conf", "r" ) as configFile:
+    for line in configFile:
+        if not line.rstrip() or line.rstrip()[0] == '#': # Skip empty lines and lines
+            continue                                     # lines starting with '#'
+
+        seperatorPos = line.find( '=' )
+        name = line[ :seperatorPos ].strip()
+        content = line[ seperatorPos + 1: ].strip()
+        d.update( { name : content } )
+
+ftpDir = d[ "ftpDir" ]
+mailingList = d[ "mailinglist" ]
+minSpcAvail = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5MB )
+
+logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
 # END VARIABLES
 
@@ -100,6 +112,7 @@ def log( msg ):
 # MAIN
 try:
     log( "Starting." )
+    print( "Starting" )
     while availableSpace:
         log( "..............New cycle.............." )
         spcAvail = getSpcAvail()
