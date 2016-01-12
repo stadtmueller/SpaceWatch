@@ -11,9 +11,5 @@ if os.getuid() != 0:
 
 # ---------------------------------------------
 
-# VARIABLES
 logFile = open( "/home/pi/FTP/SpcWtch/mesg.txt", "w" )
-
 logFile.write( "" )
-
-# END VARIABLES
