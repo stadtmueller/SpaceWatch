@@ -21,10 +21,10 @@ mkdir $swHome;
 
 
 echo "Copy Files...";
-cp ./clearFiles.py $swHome;
-cp ./sw.py $swHome;
-touch $logPath/mesg.txt;
-touch $swHome/sw.conf;
+cp src/clearFiles.py $swHome;
+cp src/sw.py $swHome;
+touch "$logPath/mesg.txt";
+touch "$swHome/sw.conf";
 
 
 echo "Installing ProFTP...";
