@@ -5,6 +5,8 @@ import apt
 import time
 import smtplib
 
+import config
+
 #----------------------------------------------------------------------
 
 # INIT
@@ -25,16 +27,7 @@ messageTemp = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" 
               "Available space: %s kB.\n\n" \
               "Only %d pictures can be taken."
 
-d = {}
-with open( "sw.conf", "r" ) as configFile:
-    for line in configFile:
-        if not line.rstrip() or line.rstrip()[0] == '#': # Skip empty lines and lines
-            continue                                     # lines starting with '#'
-
-        seperatorPos = line.find( '=' )
-        name = line[ :seperatorPos ].strip()
-        content = line[ seperatorPos + 1: ].strip()
-        d.update( { name : content } )
+d = config.readConfig()
 
 ftpDir = d[ "ftpDir" ]
 mailingList = d[ "mailinglist" ]
