@@ -1,11 +1,15 @@
 src/sw.py:
 
-	Main file. Put in autostart
+	Main file. Put in autostart.
 
-src/clearFiles.py:
+src/sw.conf:
 
-	Clear log file
+        Config file. Keep in same directory as src/sw.py.
 
-install.txt:
+src/clearLog.py:
 
-	How to install
+	Clear log file.
+
+install.sh:
+
+	Installation script.
