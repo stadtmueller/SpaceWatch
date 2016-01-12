@@ -27,7 +27,7 @@ messageTemp = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" 
               "Available space: %s kB.\n\n" \
               "Only %d pictures can be taken."
 
-d = config.readConfig()
+d = config.readConfig() # <- Dictionary with the config data as follows:
 
 ftpDir = d[ "ftpDir" ]
 mailingList = d[ "mailinglist" ]
