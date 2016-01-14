@@ -11,7 +11,7 @@ fi
 echo "Enter FTP-Directorie: ";
 read ftpDir;
 logPath="$ftpDir/SpcWtch"
-swHome="$HOME/SpcWtch"
+swHome="/usr/local/SpcWtch"
 
 
 echo "Creating directories...";
