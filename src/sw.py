@@ -20,20 +20,21 @@ if os.getuid() != 0:
 #----------------------------------------------------------------------
 
 # VARIABLES
-availableSpace = True
-spcAvail = 0
-avg = 0
-messageTemp = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" \
-              "Available space: %s kB.\n\n" \
-              "Only %d pictures can be taken."
-
 d = config.readConfig() # <- Dictionary with the config data as follows:
 
 ftpDir = d[ "ftpDir" ]
 mailingList = d[ "mailinglist" ]
 minSpcAvail = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5MB )
+unit = d[ "unit" ]
 
 logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
+
+availableSpace = True
+spcAvail = 0
+avg = 0
+messageTemp = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" \
+              "Available space: %s " + unit + ".\n\n" \
+              "Only %d pictures can be taken."
 
 # END VARIABLES
 
@@ -85,13 +86,16 @@ def getAvgFileSize():
                                         if os.path.isfile( f ):
                                                 totalSize += os.path.getsize( f )
                                                 totalCount += 1
-    log( "Total data size: %fkB." % toKilo( totalSize ) )
+    log( "Total data size: %f %s." % toKilo( totalSize ), unit )
     log( "%d pictures have been taken." % totalCount )
 
     return totalSize / totalCount
 
-def toKilo( byte ):
-    return byte / 1000
+def toKi( byte ):
+    if unit == "K":
+        return byte / 1024
+    else:
+        return byte / 1000
 
 def log( msg ):
     actTime = time.strftime( "%d.%m.%Y @ %H:%M:%S: " )
@@ -110,15 +114,15 @@ try:
         log( "..............New cycle.............." )
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
-        log( "Free disk space: %fkB" % toKilo( spcAvail ) )
-        log( "New average picture size is: %f kB" % toKilo( avg ) )
+        log( "Free disk space: %f %s." % toKi( spcAvail ), unit )
+        log( "New average picture size is: %f %s." % toKi( avg ), unit )
         log( "%d pictures could be taken." % (spcAvail / avg) )
 
         if( spcAvail < minSpcAvail ):
             # Drive is going to have no available space / Send email
             log( "No space available anymore." )
             availableSpace = False
-            message = messageTemp % ( toKilo( spcAvail ), (spcAvail / avg) )
+            message = messageTemp % ( toKi( spcAvail ), (spcAvail / avg) )
             sendEmail( mailingList, message )
             log( "Email sent." )
 
