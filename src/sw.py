@@ -65,9 +65,12 @@ def getSpcAvail():
     free = stfs.f_bavail * stfs.f_frsize
     return free
 
+# My camera creates a new directory containing another directory containing the pictures for every day.
+# You may have to rewrite this function for your use.
 # In Bytes
 def getAvgFileSize():
     dirs = os.listdir( ftpDir )
+    dirCount = 0
     totalSize = 0
     totalCount = 0
 
@@ -75,6 +78,7 @@ def getAvgFileSize():
         if d == "SpcWtch":
                 continue
         else:
+                dirCount += 1
                 d = ftpDir + d + "/"
                 if os.path.isdir( d ):
                         subDirs = os.listdir( d )
@@ -88,6 +92,7 @@ def getAvgFileSize():
                                                 totalCount += 1
     log( "Total data size: %f%s." % (toKi( totalSize ), unit) )
     log( "%d pictures have been taken." % totalCount )
+    log( "Taking %d pictures per day." % (totalCount / dirCount) )
 
     return totalSize / totalCount
 
