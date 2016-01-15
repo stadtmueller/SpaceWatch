@@ -86,7 +86,7 @@ def getAvgFileSize():
                                         if os.path.isfile( f ):
                                                 totalSize += os.path.getsize( f )
                                                 totalCount += 1
-    log( "Total data size: %f %s." % toKi( totalSize ), unit )
+    log( "Total data size: %f %s." % (toKi( totalSize ), unit) )
     log( "%d pictures have been taken." % totalCount )
 
     return totalSize / totalCount
@@ -114,8 +114,8 @@ try:
         log( "..............New cycle.............." )
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
-        log( "Free disk space: %f %s." % toKi( spcAvail ), unit )
-        log( "New average picture size is: %f %s." % toKi( avg ), unit )
+        log( "Free disk space: %f %s." % (toKi( spcAvail ), unit) )
+        log( "New average picture size is: %f %s." % (toKi( avg ), unit) )
         log( "%d pictures could be taken." % (spcAvail / avg) )
 
         if( spcAvail < minSpcAvail ):
