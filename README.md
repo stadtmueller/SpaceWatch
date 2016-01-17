@@ -12,6 +12,7 @@ SpaceWatch
     will be installed too.
     The script writes some stats to a log file, that is located on the server.
 
-    All the units are to the power of 1000. -> 1kB = 1000B
+    Units are configurable. You can either set K ( powers of 1024 ) or kB ( powers of 1000 ).
+    See config file.
 
     The config file needs to be in the same directory as the sw.py file.
