@@ -11,5 +11,5 @@ if os.getuid() != 0:
 
 # ---------------------------------------------
 
-logFile = open( "/home/pi/FTP/SpcWtch/mesg.txt", "w" )
-logFile.write( "" )
+with open( "/home/pi/FTP/SpcWtch/mesg.txt", "w" ) as logFile:
+  logFile.write( "" )
