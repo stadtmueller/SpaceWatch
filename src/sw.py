@@ -92,8 +92,8 @@ def getAvgFileSize():
                                                 totalCount += 1
     log( "Days uploading: %d." % dirCount )
     log( "Total data size: %f%s." % (toKi( totalSize ), unit) )
-    log( "%d pictures have been taken." % totalCount )
-    log( "Taking %d pictures per day." % (totalCount / dirCount) )
+    log( "Pictures taken: %d." % totalCount )
+    log( "Pictures per day: %d." % (totalCount / dirCount) )
 
     return totalSize / totalCount
 
@@ -115,14 +115,14 @@ def log( msg ):
 # MAIN
 try:
     log( "Starting." )
-    print( "Starting" )
+    print( "Starting." )
     while availableSpace:
         log( "..............New cycle.............." )
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
         log( "Free disk space: %f%s." % (toKi( spcAvail ), unit) )
-        log( "New average picture size is: %f%s." % (toKi( avg ), unit) )
-        log( "%d pictures could be taken." % (spcAvail / avg) )
+        log( "New average picture size: %f%s." % (toKi( avg ), unit) )
+        log( "Pictures could be taken: %d." % (spcAvail / avg) )
 
         if( spcAvail < minSpcAvail ):
             # Drive is going to have no available space / Send email
