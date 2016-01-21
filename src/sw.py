@@ -90,6 +90,7 @@ def getAvgFileSize():
                                         if os.path.isfile( f ):
                                                 totalSize += os.path.getsize( f )
                                                 totalCount += 1
+    log( "Days uploading: %d." % dirCount )
     log( "Total data size: %f%s." % (toKi( totalSize ), unit) )
     log( "%d pictures have been taken." % totalCount )
     log( "Taking %d pictures per day." % (totalCount / dirCount) )
