@@ -10,9 +10,9 @@ import config
 
 # INIT
 if os.getuid() != 0:
-  print( "[ERR] Root-Rechte benoetigt!" )
-  print( "      Versuch 'sudo python3 sw.py'")
-  exit( 1 )
+    print( "[ERR] Root-Rechte benoetigt!" )
+    print( "      Versuch 'sudo python3 sw.py'")
+    exit( 1 )
 
 # END INIT
 
@@ -86,20 +86,21 @@ def getAvgFileSize():
 
     for d in dirs:
         if d == "SpcWtch":
-                continue
+            continue
         else:
-                dirCount += 1
-                d = ftpDir + d + "/"
-                if os.path.isdir( d ):
-                        subDirs = os.listdir( d )
-                        for sd in subDirs:
-                                sd = d + sd + "/"
-                                files = os.listdir( sd )
-                                for f in files:
-                                        f = sd + f
-                                        if os.path.isfile( f ):
-                                                totalSize += os.path.getsize( f )
-                                                totalCount += 1
+            dirCount += 1
+            d = ftpDir + d + "/"
+            if os.path.isdir( d ):
+                subDirs = os.listdir( d )
+                for sd in subDirs:
+                    sd = d + sd + "/"
+                    files = os.listdir( sd )
+                    for f in file:
+                        f = sd + f
+                        if os.path.isfile( f ):
+                            totalSize += os.path.getsize( f )
+                            totalCount += 1
+
     log( "Days uploading: %d." % dirCount )
     log( "Total data size: %f%s." % (toKi( totalSize ), unit) )
     log( "Pictures taken: %d." % totalCount )
