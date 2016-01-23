@@ -150,11 +150,11 @@ try:
             log( "-------------------------------------" )
             exit( 0 )
 
-        if messaging == "d" && cycles == DAY:
+        if messaging == "d" and cycles == DAY:
             message = statMessageTemp % ("Daily", statData )
             sendEmail( message, subjectFreq )
             cycles = 0
-        if messaging == "w" && cycles == WEEK:
+        if messaging == "w" and cycles == WEEK:
             message = statMessageTemp % ("Weekly", statData)
             sendEmail( message, subjectFreq )
             cycles = 0
