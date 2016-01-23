@@ -150,17 +150,17 @@ try:
             log( "-------------------------------------" )
             exit( 0 )
 
-       if messaging == "d" && cycles == DAY:
+        if messaging == "d" && cycles == DAY:
             message = statMessageTemp % ("Daily", statData )
             sendEmail( message, subjectFreq )
             cycles = 0
-       if messaging == "w" && cycles == WEEK:
+        if messaging == "w" && cycles == WEEK:
             message = statMessageTemp % ("Weekly", statData)
             sendEmail( message, subjectFreq )
             cycles = 0
 
-       time.sleep( 30 * 60 ) # Sleep half an hour
-       statData = ""
+        time.sleep( 30 * 60 ) # Sleep half an hour
+        statData = ""
 except KeyboardInterrupt:
     print( "\n" )
     log( "Received KeyboardInterrupt. Exiting." )
