@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 
 import os
-import apt
 import time
 import smtplib
 
@@ -22,35 +21,45 @@ if os.getuid() != 0:
 # VARIABLES
 d = config.readConfig() # <- Dictionary with the config data as follows:
 
-ftpDir = d[ "ftpDir" ]
+ftpDir      = d[ "ftpDir" ]
 mailingList = d[ "mailinglist" ]
-minSpcAvail = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5MB )
-unit = d[ "unit" ]
+minSpcAvail = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5Mb )
+unit        = d[ "unit" ]
+messaging   = d[ "messaging" ]
 
 logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
-availableSpace = True
-spcAvail = 0
-avg = 0
-messageTemp = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" \
-              "Available space: %s" + unit + ".\n\n" \
-              "Only %d pictures can be taken."
+WEEK            = 336 # One week = 336 half hours
+DAY             = 46  # One day = 46 half hours
+availableSpace  = True
+spcAvail        = 0
+avg             = 0
+cycles          = 0
+statData        = ""
+messageTemp     = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" \
+                  "Available space: %s" + unit + ".\n\n" \
+                  "Only %d pictures can be taken."
+statMessageTemp = "Raspberry Pi FTP-Server: %s stats\n" \
+                  "Here are your stats:\n" \
+                  "%s\n\n"
+subjectNorm     = "Raspberry Pi FTP-Server: No space available"
+subjectFreq     = "Raspberry Pi FTP-Server: Stats"
 
 # END VARIABLES
 
 #----------------------------------------------------------------------
 
 # FUNCTIONS
-def sendEmail( mailingList, message ):
+def sendEmail( message, subject ):
     login = "XXXX"
     password = "XXXX"
     smtpserver = "smtp.gmail.com:587"
     mailer = "Raspberry Pi"
+    mailinList = ",".join( mailingList )
 
     header  = "From: %s\n" % mailer
-    mailingList = ",".join( mailingList )
     header += "To: %s\n" % mailingList
-    header += "Subject: Raspberry Pi FTP-Server: No space available\n\n"
+    header += "Subject: %s\n\n" % subject
     message = header + message
 
     server = smtplib.SMTP( smtpserver )
@@ -65,7 +74,8 @@ def getSpcAvail():
     free = stfs.f_bavail * stfs.f_frsize
     return free
 
-# My camera creates a new directory containing another directory containing the pictures for every day.
+# My camera creates a new directory every day containing 
+# another directory containing the pictures
 # You may have to rewrite this function for your use.
 # In Bytes
 def getAvgFileSize():
@@ -105,8 +115,11 @@ def toKi( byte ):
 
 def log( msg ):
     actTime = time.strftime( "%d.%m.%Y @ %H:%M:%S: " )
-    logFile.write( actTime + msg + "\n" )
+    msg = actTime + msg + "\n"
+    logFile.write( msg )
     logFile.flush()
+
+    statData += msg
 
 # END FUNCTIONS
 
@@ -118,6 +131,7 @@ try:
     print( "Starting." )
     while availableSpace:
         log( "..............New cycle.............." )
+        cycles += 1
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
         log( "Free disk space: %f%s." % (toKi( spcAvail ), unit) )
@@ -129,16 +143,24 @@ try:
             log( "No space available anymore." )
             availableSpace = False
             message = messageTemp % ( toKi( spcAvail ), (spcAvail / avg) )
-            sendEmail( mailingList, message )
+            sendEmail( message, subjectNorm )
             log( "Email sent." )
 
             log( "Exiting normal." )
             log( "-------------------------------------" )
             exit( 0 )
-        else:
-      	    # Sleep half an hour
-            time.sleep( 30 * 60 )
-        time.sleep( 1 )
+
+       if messaging == "d" && cycles == DAY:
+            message = statMessageTemp % ("Daily", statData )
+            sendEmail( message, subjectFreq )
+            cycles = 0
+       if messaging == "w" && cycles == WEEK:
+            message = statMessageTemp % ("Weekly", statData)
+            sendEmail( message, subjectFreq )
+            cycles = 0
+
+       time.sleep( 30 * 60 ) # Sleep half an hour
+       statData = ""
 except KeyboardInterrupt:
     print( "\n" )
     log( "Received KeyboardInterrupt. Exiting." )
