@@ -95,7 +95,7 @@ def getAvgFileSize():
                 for sd in subDirs:
                     sd = d + sd + "/"
                     files = os.listdir( sd )
-                    for f in file:
+                    for f in files:
                         f = sd + f
                         if os.path.isfile( f ):
                             totalSize += os.path.getsize( f )
