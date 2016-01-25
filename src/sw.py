@@ -115,6 +115,7 @@ def toKi( byte ):
         return byte / 1000
 
 def log( msg ):
+    global statData
     actTime = time.strftime( "%d.%m.%Y @ %H:%M:%S: " )
     msg = actTime + msg + "\n"
     logFile.write( msg )
