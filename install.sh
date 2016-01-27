@@ -106,3 +106,12 @@ then
     echo "Try to call ftp://$ip from your browser and see the directory SpcWtch/."
 fi
 
+echo "";
+echo "Setup finished. You need to give SpaceWatch login information to send emails.";
+echo "Run 'sudo nano /usr/local/SpcWtch/sw.py'.";
+echo "Search for the lines login = 'XXXXX' and password = 'XXXXX'.";
+echo "Replace 'XXXXX' with the login and password you want to send emails from.";
+echo "";
+echo "If you want SpaceWatch to automatically start with";
+echo "the server run 'sudo crontab -e' and add the line '@reboot /usr/local/SpcWtch/sw.py'";
+echo "to the end of the file.";
