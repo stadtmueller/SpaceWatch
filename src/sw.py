@@ -150,6 +150,7 @@ try:
 
             log( "Exiting normal." )
             log( "-------------------------------------" )
+            logFile.close()
             exit( 0 )
 
         if messaging == "d" and cycles == DAY:
