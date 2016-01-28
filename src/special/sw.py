@@ -15,11 +15,11 @@ import config
 #----------------------------------------------------------------------
 
 
-specialLog = open( "specialLog.log", "a" )
+specialLogFile = open( "specialLog.log", "a" )
 def specialLog( msg ):
     print( msg, end = "", flush = True )
-    specialLog.write( msg )
-    specialLog.flush()
+    specialLogFile.write( msg )
+    specialLogFile.flush()
 
 # INIT
 
@@ -134,15 +134,15 @@ def getAvgFileSize():
     log( "Pictures taken: %d." % totalCount )
     log( "Pictures per day: %d." % (totalCount / dirCount) )
 
-    specialLog( "Done [ Returning: %f ]\n" )
+    specialLog( "Done [ Returning: %f ]\n" % float( totalSize / totalCount ) ))
     return totalSize / totalCount
 
 def toKi( byte ):
-    specialLog( "Converting..." )
     if unit == "K":
         return byte / 1024
     else:
         return byte / 1000
+
     specialLog( "Done\n" )
 
 def log( msg ):

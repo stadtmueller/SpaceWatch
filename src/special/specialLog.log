@@ -1,0 +1,19 @@
+Init...Done. 
+Setting variables...Init...Done. 
+Setting variables...Init...Done. 
+Setting variables...Done 
+Starting...Getting acvailable space...Done [ Returning: 10749689856.000000 ]
+Getting average file size...Converting...Interrupted by <class 'ZeroDivisionError'>... Exiting.Init...Done. 
+Setting variables...Done 
+Starting...Getting acvailable space...Done [ Returning: 10749689856.000000 ]
+Getting average file size...Converting...Can not convert. Returning 0. Interrupted by <class 'ZeroDivisionError'>... Exiting.Init...Done. 
+Setting variables...Done 
+Starting...Getting acvailable space...Done [ Returning: 10749689856.000000 ]
+Getting average file size...Converting...Can not convert. Returning 0. Interrupted by <class 'ZeroDivisionError'>... Exiting.Init...Done. 
+Setting variables...Done 
+Starting...Getting acvailable space...Done [ Returning: 10749685760.000000 ]
+Getting average file size...Done [ Returning: %f ]
+Interrupted by <class 'ZeroDivisionError'>... Exiting.Init...Done. 
+Setting variables...Done 
+Starting...Getting acvailable space...Done [ Returning: 10749677568.000000 ]
+Getting average file size...Done [ Returning: %f ]
