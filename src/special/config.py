@@ -2,7 +2,7 @@
 
 def readConfig():
     d = {}
-    with open( "sw.conf", "r" ) as configFile:
+    with open( "/usr/local/SpcWtch/sw.conf", "r" ) as configFile:
         for line in configFile:
             if not line.rstrip() or line.rstrip()[0] == '#': # Skip empty lines and lines
                 continue                                     # lines starting with '#'
