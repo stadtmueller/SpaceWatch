@@ -15,7 +15,7 @@ import config
 #----------------------------------------------------------------------
 
 
-specialLogFile = open( "specialLog.log", "a" )
+specialLogFile = open( "/usr/local/SpcWtch/specialLog.log", "a" )
 def specialLog( msg ):
     print( msg, end = "", flush = True )
     specialLogFile.write( msg )

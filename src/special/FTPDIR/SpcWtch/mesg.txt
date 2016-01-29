@@ -30,3 +30,14 @@
 28.01.2016 @ 19:41:06: Pictures could be taken: 977243415.
 28.01.2016 @ 19:41:15: Received KeyboardInterrupt. Exiting.
 28.01.2016 @ 19:41:15: -------------------------------------
+29.01.2016 @ 17:41:20: Starting.
+29.01.2016 @ 17:41:20: ..............New cycle..............
+29.01.2016 @ 17:41:20: Days uploading: 1.
+29.01.2016 @ 17:41:20: Total data size: 0.011000kB.
+29.01.2016 @ 17:41:20: Pictures taken: 1.
+29.01.2016 @ 17:41:20: Pictures per day: 1.
+29.01.2016 @ 17:41:20: Free disk space: 2286960.640000kB.
+29.01.2016 @ 17:41:20: New average picture size: 0.011000kB.
+29.01.2016 @ 17:41:20: Pictures could be taken: 207905512.
+29.01.2016 @ 17:41:30: Received KeyboardInterrupt. Exiting.
+29.01.2016 @ 17:41:30: -------------------------------------
