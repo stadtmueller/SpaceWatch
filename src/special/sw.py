@@ -134,7 +134,7 @@ def getAvgFileSize():
     log( "Pictures taken: %d." % totalCount )
     log( "Pictures per day: %d." % (totalCount / dirCount) )
 
-    specialLog( "Done [ Returning: %f ]\n" % float( totalSize / totalCount ) ))
+    specialLog( "Done [ Returning: %f ]\n" % float( totalSize / totalCount ) )
     return totalSize / totalCount
 
 def toKi( byte ):
