@@ -136,6 +136,7 @@ try:
         cycles += 1
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
+        log( "Cycle number: %d" % cycles )
         log( "Free disk space: %f%s." % (toKi( spcAvail ), unit) )
         log( "New average picture size: %f%s." % (toKi( avg ), unit) )
         log( "Pictures could be taken: %d." % (spcAvail / avg) )
