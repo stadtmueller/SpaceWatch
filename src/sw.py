@@ -26,11 +26,11 @@ mailingList = d[ "mailinglist" ]
 minSpcAvail = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5Mb )
 unit        = d[ "unit" ]
 messaging   = d[ "messaging" ]
+mailtime    = int( d[ "mailtime" ] )
 
 logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
 WEEK            = 336 # One week = 336 half hours
-DAY             = 46  # One day = 46 half hours
 availableSpace  = True
 spcAvail        = 0
 avg             = 0
@@ -155,7 +155,7 @@ try:
             logFile.close()
             exit( 0 )
 
-        if messaging == "d" and actHour >= 18 and actHour < 19:
+        if messaging == "d" and actHour >= mailtime and actHour < (mailtime + 1):
             message = statMessageTemp % ("Daily", statData )
             sendEmail( message, subjectFreq )
             cycles = 0
