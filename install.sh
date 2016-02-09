@@ -17,7 +17,7 @@ else
 fi
     
     
-echo "Enter FTP-Directory( If it doesn't exist it will be created ): ";
+echo "Enter FTP-Directory( If it doesn't exist it will be created, no '/' at the end ): ";
 read ftpDir;
 
 if [ ! -d $ftpDir ]
@@ -53,14 +53,18 @@ read unit;
 echo "Enter messaging frequency( d for daily; w for weekly; n for never ): ";
 read messagingFreq;
 
+echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
+read mailtime;
+
 
 configFile="$swHome/sw.conf"
 
-echo "ftpDir = $ftpDir" >> $configFile;
+echo "ftpDir = $ftpDir/" >> $configFile;
 echo "mailinglist = $mailinglist" >> $configFile;
 echo "min = $min" >> $configFile;
 echo "unit = $unit" >> $configFile;
 echo "messaging = $messagingFreq" >> $configFile;
+echo "mailtime = $mailtime" >> $configFile;
 echo ""
 
 
