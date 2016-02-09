@@ -136,6 +136,7 @@ try:
         cycles += 1
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
+        actHour = int( time.strftime( "%H" ) )
         log( "Cycle number: %d" % cycles )
         log( "Free disk space: %f%s." % (toKi( spcAvail ), unit) )
         log( "New average picture size: %f%s." % (toKi( avg ), unit) )
@@ -154,7 +155,7 @@ try:
             logFile.close()
             exit( 0 )
 
-        if messaging == "d" and cycles == DAY:
+        if messaging == "d" and actHour >= 18 and actHour < 19:
             message = statMessageTemp % ("Daily", statData )
             sendEmail( message, subjectFreq )
             cycles = 0
