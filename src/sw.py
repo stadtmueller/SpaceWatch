@@ -161,11 +161,9 @@ try:
         if messaging == "d" and actHour >= mailtime and actHour < (mailtime + 1):
             message = statMessageTemp % ("Daily", statData )
             sendEmail( message, subjectFreq )
-            cycles = 0
         if messaging == "w" and cycles == WEEK:
             message = statMessageTemp % ("Weekly", statData)
             sendEmail( message, subjectFreq )
-            cycles = 0
 
         time.sleep( 30 * 60 ) # Sleep half an hour
         statData = ""
