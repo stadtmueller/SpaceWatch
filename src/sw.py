@@ -36,14 +36,14 @@ spcAvail        = 0
 avg             = 0
 cycles          = 0
 statData        = ""
-messageTemp     = "Raspberry Pi FTP-Server: Reached minimum value of free space!\n" \
+messageTemp     = "SpaceWatch: Reached minimum value of free space!\n" \
                   "Available space: %s" + unit + ".\n\n" \
                   "Only %d pictures can be taken."
-statMessageTemp = "Raspberry Pi FTP-Server: %s stats\n" \
+statMessageTemp = "SpaceWatch: %s stats\n" \
                   "Here are your stats:\n" \
                   "%s\n\n"
-subjectNorm     = "Raspberry Pi FTP-Server: No space available"
-subjectFreq     = "Raspberry Pi FTP-Server: Stats"
+subjectNorm     = "SpaceWatch: No space available"
+subjectFreq     = "SpaceWatch: Stats"
 
 # END VARIABLES
 
@@ -54,7 +54,7 @@ def sendEmail( message, subject ):
     login = "XXXX"
     password = "XXXX"
     smtpserver = "smtp.gmail.com:587"
-    mailer = "Raspberry Pi"
+    mailer = "SpaceWatch"
     mailinList = ",".join( mailingList )
 
     header  = "From: %s\n" % mailer
