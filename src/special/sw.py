@@ -4,7 +4,7 @@ import os
 import time
 import smtplib
 import RPi.GPIO as GPIO
-from thread import start_new_thread
+from _thread import start_new_thread
 
 import config
 
