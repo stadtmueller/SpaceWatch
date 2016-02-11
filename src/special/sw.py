@@ -144,7 +144,7 @@ try:
     log( "Starting." )
     print( "Starting." )
     
-    start_new_thread( rebootOnButton )
+    start_new_thread( rebootOnButton, () )
     
     while availableSpace:
         log( "..............New cycle.............." )
