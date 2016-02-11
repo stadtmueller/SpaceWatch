@@ -58,9 +58,16 @@ subjectFreq     = "Raspberry Pi FTP-Server: Stats"
 def rebootOnButton():
     GPIO.wait_for_edge( 11, GPIO.RISING )
 
+    GPIO.output( 11, GPIO.HIGH )
+
     log( "Button press. Rebooting." )
-    log( "------------------------" )
+    log( "-------------------------------------" )
     logFile.close()
+
+    time.sleep( 1 )
+
+    GPIO.output( 11, GPIO.LOW )
+    GPIO.cleanup()
 
     os.system( "sudo reboot" )
 
@@ -173,16 +180,15 @@ try:
             log( "Exiting normal." )
             log( "-------------------------------------" )
             logFile.close()
+            GPIO.cleanup()
             exit( 0 )
 
         if messaging == "d" and actHour >= mailtime and actHour < (mailtime + 1):
             message = statMessageTemp % ("Daily", statData )
             sendEmail( message, subjectFreq )
-            cycles = 0
         if messaging == "w" and cycles == WEEK:
             message = statMessageTemp % ("Weekly", statData)
             sendEmail( message, subjectFreq )
-            cycles = 0
 
         time.sleep( 30 * 60 ) # Sleep half an hour
         statData = ""
