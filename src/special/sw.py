@@ -32,8 +32,8 @@ mailtime    = int( d[ "mailtime" ] )
 
 logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
-GPIO.setmode( GPIO.BCM )
-GPIO.setup( 0, GPIO.IN, pull_up_down=GPIO.PUD_DOWN )
+GPIO.setmode( GPIO.BOARD )
+GPIO.setup( 11, GPIO.IN, pull_up_down=GPIO.PUD_DOWN )
 
 WEEK            = 336 # One week = 336 half hours
 availableSpace  = True
@@ -56,13 +56,13 @@ subjectFreq     = "Raspberry Pi FTP-Server: Stats"
 
 # FUNCTIONS
 def rebootOnButton():
-    while True:
-        if GPIO.input( 0 ):
-            log( "Button press. Rebooting." )
-            log( "------------------------" )
-            os.system( "sudo reboot" )
-        else:
-            time.sleep( 2 )
+    GPIO.wait_for_edge( 11, GPIO.RISING )
+
+    log( "Button press. Rebooting." )
+    log( "------------------------" )
+    logFile.close()
+
+    os.system( "sudo reboot" )
 
 def sendEmail( message, subject ):
     login = "XXXX"
