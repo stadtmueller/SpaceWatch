@@ -81,10 +81,11 @@ def getAvgFileSize():
     totalSize = 0
     totalCount = 0
 
+    for directory in os.listdir( ftpDir ):
+        if directory != "SpcWtch":
+            dirCount += 1
+
     for root, dirs, files in os.walk( ftpDir ):
-        for directory in dirs:
-            if directory != "SpcWtch":
-                dirCount += 1
         for filename in files:
             if filename != "mesg.txt":
                 totalCount += 1
