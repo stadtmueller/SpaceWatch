@@ -34,6 +34,8 @@ logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
 GPIO.setmode( GPIO.BOARD )
 GPIO.setup( 11, GPIO.IN, pull_up_down=GPIO.PUD_DOWN )
+GPIO.setup( 8, GPIO.OUT )
+GPIO.output( 8, GPIO.LOW )
 
 WEEK            = 336 # One week = 336 half hours
 availableSpace  = True
@@ -58,7 +60,7 @@ subjectFreq     = "Raspberry Pi FTP-Server: Stats"
 def rebootOnButton():
     GPIO.wait_for_edge( 11, GPIO.RISING )
 
-    GPIO.output( 11, GPIO.HIGH )
+    GPIO.output( 8, GPIO.HIGH )
 
     log( "Button press. Rebooting." )
     log( "-------------------------------------" )
@@ -66,7 +68,7 @@ def rebootOnButton():
 
     time.sleep( 1 )
 
-    GPIO.output( 11, GPIO.LOW )
+    GPIO.output( 8, GPIO.LOW )
     GPIO.cleanup()
 
     os.system( "sudo reboot" )
