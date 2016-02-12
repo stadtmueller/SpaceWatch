@@ -10,8 +10,8 @@ import config
 
 # INIT
 if os.getuid() != 0:
-    print( "[ERR] Root-Rechte benoetigt!" )
-    print( "      Versuch 'sudo python3 sw.py'")
+    print( "[ERR] Need root privileges!" )
+    print( "      Try 'sudo python3 /usr/local/SpcWtch/sw.py'")
     exit( 1 )
 
 # END INIT
@@ -43,7 +43,7 @@ statMessageTemp = "SpaceWatch: %s stats\n" \
                   "Here are your stats:\n" \
                   "%s\n\n"
 subjectNorm     = "SpaceWatch: No space available"
-subjectFreq     = "SpaceWatch: Stats"
+subjectStat     = "SpaceWatch: Stats"
 
 # END VARIABLES
 
@@ -149,10 +149,10 @@ try:
 
         if messaging == "d" and actHour >= mailtime and actHour < (mailtime + 1):
             message = statMessageTemp % ("Daily", statData )
-            sendEmail( message, subjectFreq )
+            sendEmail( message, subjectStat )
         if messaging == "w" and cycles == WEEK:
             message = statMessageTemp % ("Weekly", statData)
-            sendEmail( message, subjectFreq )
+            sendEmail( message, subjectStat )
 
         time.sleep( 30 * 60 ) # Sleep half an hour
         statData = ""
