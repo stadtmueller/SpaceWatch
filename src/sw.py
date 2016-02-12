@@ -76,7 +76,6 @@ def getSpcAvail():
 
 # In Bytes
 def getAvgFileSize():
-    dirs = os.listdir( ftpDir )
     dirCount = 0
     totalSize = 0
     totalCount = 0
