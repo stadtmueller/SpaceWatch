@@ -100,27 +100,19 @@ def getSpcAvail():
 # You may have to rewrite this function for your use.
 # In Bytes
 def getAvgFileSize():
-    dirs = os.listdir( ftpDir )
     dirCount = 0
     totalSize = 0
     totalCount = 0
 
-    for d in dirs:
-        if d == "SpcWtch":
-            continue
-        else:
+    for directory in os.listdir( ftpDir ):
+        if directory != "SpcWtch":
             dirCount += 1
-            d = ftpDir + d + "/"
-            if os.path.isdir( d ):
-                subDirs = os.listdir( d )
-                for sd in subDirs:
-                    sd = d + sd + "/"
-                    files = os.listdir( sd )
-                    for f in files:
-                        f = sd + f
-                        if os.path.isfile( f ):
-                            totalSize += os.path.getsize( f )
-                            totalCount += 1
+
+    for root, dirs, files in os.walk( ftpDir ):
+        for filename in files:
+            if filename != "mesg.txt":
+                totalCount += 1
+                totalSize += os.path.getsize( os.path.join( root, filename ) )
 
     log( "Days uploading: %d." % dirCount )
     log( "Total data size: %f%s." % (toKi( totalSize ), unit) )
