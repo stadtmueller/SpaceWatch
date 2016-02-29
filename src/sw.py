@@ -91,17 +91,32 @@ def getAvgFileSize():
                 totalSize += os.path.getsize( os.path.join( root, filename ) )
 
     log( "Days uploading: %d." % dirCount )
-    log( "Total data size: %f%s." % (toKi( totalSize ), unit) )
+    log( "Total data size: %f%s." % (convert( totalSize ), unit) )
     log( "Pictures taken: %d." % totalCount )
     log( "Pictures per day: %d." % (totalCount / dirCount) )
 
     return totalSize / totalCount
 
-def toKi( byte ):
+def convert( byte ):
+    byte = float( byte )
+    if byte == 0:
+        return 0
+
     if unit == "K":
         return byte / 1024
-    else:
+    elif unit == "kB":
         return byte / 1000
+    elif unit == "M":
+        return byte / 1024 / 1024
+    elif unit == "mB":
+        return byte / 1000 / 1000
+    elif unit == "G":
+        return byte / 1024 / 1024 / 1024
+    elif unit == "gB":
+        return byte / 1000 / 1000 / 1000
+    else:
+        log( "Unknown unit. Going on with K." )
+        return unit / 1024
 
 def log( msg ):
     global statData
@@ -129,8 +144,8 @@ try:
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
         log( "Cycle number: %d" % cycles )
-        log( "Free disk space: %f%s." % (toKi( spcAvail ), unit) )
-        log( "New average picture size: %f%s." % (toKi( avg ), unit) )
+        log( "Free disk space: %f%s." % (convert( spcAvail ), unit) )
+        log( "New average picture size: %f%s." % (convert( avg ), unit) )
         log( "Pictures could be taken: %d." % (spcAvail / avg) )
         # Critical
 
@@ -138,7 +153,7 @@ try:
             # Drive is going to have no available space / Send email
             log( "No space available anymore." )
             availableSpace = False
-            message = messageTemp % ( toKi( spcAvail ), (spcAvail / avg) )
+            message = messageTemp % ( convert( spcAvail ), (spcAvail / avg) )
             sendEmail( message, subjectNorm )
             log( "Email sent." )
 

@@ -16,10 +16,15 @@ SpaceWatch
     If you install it with the install script, proftpd, a FTP-Server deamon, 
     will be installed too.
 
+    Run "sudo ./install [ option ]" to install SpaceWatch.
+
+    Add the option "-noserver" to installation command to suppress server installation.
+
     The script writes some stats to a log file, that should be together with sw.py
     located on the server.
 
-    Units are configurable. You can either set K ( powers of 1024 ) or kB ( powers of 1000 ).
+    Units are configurable. You can either set unit to powers of 1024 or units to powers of 1000
+    such as GiBiByte or Gigabyte.
     See config file.
 
     The config file needs to be in the same directory as the sw.py file.
