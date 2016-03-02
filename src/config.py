@@ -19,10 +19,10 @@ def readConfig():
             content = line[ seperatorPos + 1: ].strip()
             d.update( { name : content } )
             
-    if not d[ "unit" ] in "KkB":
+    if not d[ "unit" ] in [ "K", "kB", "M", "mB", "G", "gB" ]:
         d[ "unit" ] = "K"
         print( "Error in config file detected. Setting unit to K." )
-    if not d[ "messaging" ] in "nwd":
+    if not d[ "messaging" ] in [ "n", "w", "d" ]:
         d[ "messaging" ] = "n"
         print( "Error in config file detected. Setting messaging to never." )
     
