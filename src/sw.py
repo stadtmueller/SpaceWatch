@@ -92,6 +92,7 @@ def getAvgFileSize():
 
     log( "Days uploading: %d." % dirCount )
     log( "Total data size: %f%s." % (convert( totalSize ), unit) )
+    log( "Daily throughput: %f%s." % ((convert(totalSize) / dirCount), unit ) )
     log( "Pictures taken: %d." % totalCount )
     log( "Pictures per day: %d." % (totalCount / dirCount) )
 
