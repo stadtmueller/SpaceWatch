@@ -30,6 +30,8 @@ mailtime    = int( d[ "mailtime" ] )
 
 logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
+pid = str( os.getpid() )
+
 WEEK            = 336 # One week = 336 half hours
 availableSpace  = True
 spcAvail        = 0
@@ -137,8 +139,8 @@ def log( msg ):
 
 # MAIN
 try:
-    log( "Starting." )
-    print( "Starting." )
+    log( "Starting with PID: " + pid )
+    print( "Starting with PID: " + pid )
     while availableSpace:
         log( "..............New cycle.............." )
         cycles += 1
