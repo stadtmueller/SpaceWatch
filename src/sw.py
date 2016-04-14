@@ -62,11 +62,14 @@ def sendEmail( message, subject ):
     header += "Subject: %s\n\n" % subject
     message = header + message
 
-    server = smtplib.SMTP( smtpserver )
-    server.starttls()
-    server.login( login, password )
-    server.sendmail( mailer, mailingList, message )
-    server.quit()
+    try:
+        server = smtplib.SMTP( smtpserver )
+        server.starttls()
+        server.login( login, password )
+        server.sendmail( mailer, mailingList, message )
+        server.quit()
+    except smtplib.SMTPAuthenticationError:
+        log( "Wrong login data. Can not send any mails." )
 
 # In Bytes
 def getSpcAvail():
