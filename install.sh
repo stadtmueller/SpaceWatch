@@ -56,6 +56,12 @@ read messagingFreq;
 echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
 read mailtime;
 
+echo "Enter email login: ";
+read login;
+
+echo "Enter password: ";
+read password;
+
 
 configFile="$swHome/sw.conf"
 
@@ -65,6 +71,8 @@ echo "min = $min" >> $configFile;
 echo "unit = $unit" >> $configFile;
 echo "messaging = $messagingFreq" >> $configFile;
 echo "mailtime = $mailtime" >> $configFile;
+echo "loginName = $login" >> $configFile;
+echo "loginPassword = $password" >> $configFile;
 echo ""
 
 
@@ -111,10 +119,7 @@ then
 fi
 
 echo "";
-echo "Setup finished. You need to give SpaceWatch login information to send emails.";
-echo "Run 'sudo nano /usr/local/SpcWtch/sw.py'.";
-echo "Search for the lines login = 'XXXXX' and password = 'XXXXX'.";
-echo "Replace 'XXXXX' with the login and password you want to send emails from.";
+echo "Setup finished."
 echo "";
 echo "If you want SpaceWatch to automatically start with";
 echo "the server run 'sudo crontab -e' and add the line '@reboot /usr/local/SpcWtch/sw.py'";
