@@ -21,12 +21,14 @@ if os.getuid() != 0:
 # VARIABLES
 d = config.readConfig() # <- Dictionary with the config data as follows:
 
-ftpDir      = d[ "ftpDir" ]
-mailingList = d[ "mailinglist" ]
-minSpcAvail = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5Mb )
-unit        = d[ "unit" ]
-messaging   = d[ "messaging" ]
-mailtime    = int( d[ "mailtime" ] )
+ftpDir        = d[ "ftpDir" ]
+mailingList   = d[ "mailinglist" ]
+minSpcAvail   = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5Mb )
+unit          = d[ "unit" ]
+messaging     = d[ "messaging" ]
+mailtime      = int( d[ "mailtime" ] )
+loginName     = d[ "login" ]
+loginPassword = d[ "password" ]
 
 logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
@@ -53,8 +55,6 @@ subjectStat     = "SpaceWatch: Stats"
 
 # FUNCTIONS
 def sendEmail( message, subject ):
-    login = "XXXX"
-    password = "XXXX"
     smtpserver = "smtp.gmail.com:587"
     mailer = "SpaceWatch"
     mailinList = ",".join( mailingList )
@@ -67,7 +67,7 @@ def sendEmail( message, subject ):
     try:
         server = smtplib.SMTP( smtpserver )
         server.starttls()
-        server.login( login, password )
+        server.login( loginName, loginPassword )
         server.sendmail( mailer, mailingList, message )
         server.quit()
     except smtplib.SMTPAuthenticationError:
