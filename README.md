@@ -10,8 +10,8 @@ SpaceWatch
     But theres not much to change if you want to use it somewhere else.
     See config file.
 
-    Make sure to edit the config file and sw.py. Give it your username and password to
-    mail address so SpaceWatch can send from it.
+    Make sure to use or create a dedicated mail account for emailing because
+    there will be clear text passwords in the config file.
 
     If you install it with the install script, proftpd, a FTP-Server deamon, 
     will be installed too.
