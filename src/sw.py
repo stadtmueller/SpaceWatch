@@ -35,7 +35,6 @@ logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
 pid = str( os.getpid() )
 
-WEEK            = 336 # One week = 336 half hours
 availableSpace  = True
 spcAvail        = 0
 avg             = 0
@@ -106,6 +105,7 @@ def getAvgFileSize():
 
 def convert( byte ):
     byte = float( byte )
+
     if byte == 0:
         return 0
 
@@ -148,14 +148,12 @@ try:
         actHour = int( time.strftime( "%H" ) )
         actDay  = int( time.strftime( "%w" ) )
 
-        # Critical
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
         log( "Cycle number: %d" % cycles )
         log( "Free disk space: %f%s." % (convert( spcAvail ), unit) )
         log( "New average picture size: %f%s." % (convert( avg ), unit) )
         log( "Pictures could be taken: %d." % (spcAvail / avg) )
-        # Critical
 
         if( spcAvail < minSpcAvail ):
             # Drive is going to have no available space / Send email
@@ -177,12 +175,12 @@ try:
             message = statMessageTemp % ("Weekly", statData)
             sendEmail( message, subjectStat )
 
-        time.sleep( 30 * 60 ) # Sleep half an hour
+        time.sleep( 1800 ) # Sleep half an hour
         statData = ""
 except KeyboardInterrupt:
     print( "\n" )
     log( "Received KeyboardInterrupt. Exiting." )
-    log( "-------------------------------------" ) 
+    log( "-------------------------------------" )
     logFile.close()
     exit( 0 )
 
