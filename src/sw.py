@@ -123,7 +123,7 @@ def convert( byte ):
         return str( byte / 1000 / 1000 / 1000 ) + unit
     else:
         log( "Unknown unit. Going on with K." )
-        return str( unit / 1024 ) + "K"
+        return str( byte / 1024 ) + "K"
 
 def log( msg ):
     global statData
