@@ -27,8 +27,8 @@ minSpcAvail   = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5Mb )
 unit          = d[ "unit" ]
 messaging     = d[ "messaging" ]
 mailtime      = int( d[ "mailtime" ] )
-loginName     = d[ "login" ]
-loginPassword = d[ "password" ]
+loginName     = d[ "loginName" ]
+loginPassword = d[ "loginPassword" ]
 
 logFile = open( ftpDir + "SpcWtch/mesg.txt", "a" )
 
