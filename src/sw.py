@@ -97,33 +97,40 @@ def getAvgFileSize():
 
     log( "Days uploading: %d." % dirCount )
     log( "Total data size: %s." % convert( totalSize ) )
-    log( "Daily throughput: %s." % (convert(totalSize) / dirCount) )
+    log( "Daily throughput: %s." % (convert(totalSize, True) / dirCount) )
     log( "Pictures taken: %d." % totalCount )
     log( "Pictures per day: %d." % (totalCount / dirCount) )
 
     return totalSize / totalCount
 
-def convert( byte ):
+def convert( byte, digitsOnly=False ):
     byte = float( byte )
 
     if byte == 0:
         return 0
 
+    conv = 0
+
     if unit == "K":
-        return str( byte / 1024 ) + unit
+        conv = str( byte / 1024 ) + unit
     elif unit == "kB":
-        return str( byte / 1000 ) + unit
+        conv = str( byte / 1000 ) + unit
     elif unit == "M":
-        return str( byte / 1024 / 1024 ) + unit
+        conv = str( byte / 1024 / 1024 ) + unit
     elif unit == "mB":
-        return str( byte / 1000 / 1000 ) + unit
+        conv = str( byte / 1000 / 1000 ) + unit
     elif unit == "G":
-        return str( byte / 1024 / 1024 / 1024 ) + unit
+        conv = str( byte / 1024 / 1024 / 1024 ) + unit
     elif unit == "gB":
-        return str( byte / 1000 / 1000 / 1000 ) + unit
+        conv = str( byte / 1000 / 1000 / 1000 ) + unit
     else:
         log( "Unknown unit. Going on with K." )
-        return str( byte / 1024 ) + "K"
+        conv = str( byte / 1024 ) + "K"
+
+    if( digitsOnly ):
+        return int( re.sub( "[^0-9]", "", conv ) )
+
+    return conv
 
 def log( msg ):
     global statData
