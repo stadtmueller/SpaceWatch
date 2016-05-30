@@ -11,9 +11,9 @@ fi
 if [ "$1" = "-noserver" ]
 then
     echo "No-server set...";
-    noserv=1
+    noserv=1;
 else
-    noserv=0
+    noserv=0;
 fi
     
     
@@ -24,8 +24,9 @@ if [ ! -d $ftpDir ]
 then
     mkdir $ftpDir;
 fi
-logPath="$ftpDir/SpcWtch"
-swHome="/usr/local/SpcWtch"
+
+logPath="$ftpDir/SpcWtch";
+swHome="/usr/local/SpcWtch";
 
 echo "Creating directories...";
 mkdir $logPath;
@@ -53,13 +54,18 @@ read mailinglist;
 echo "Enter messaging frequency for statistics( d for daily; w for weekly; n for never ):";
 read messagingFreq;
 
-if [ $messagingFreq -ne "n" ]
-then
-    echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
-    read mailtime;
-else
-    mailtime=0;
-fi
+case $messagingFreq in
+    "n") mailtime=0; 
+	 mailday=0; ;;
+    "d") echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
+         read mailtime; ;;
+    "w") echo "Enter the day the stat mail will be send at( number between 0 and 7 ): ";
+         read mailday;
+	 echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
+         read mailtime; ;;
+      *) echo "Not valid. Setting frequency to 'n'";
+	 $messagingFreq="n"; ;;
+esac
 
 echo "Enter email login: ";
 read login;
@@ -68,20 +74,21 @@ echo "Enter password: ";
 read password;
 
 
-configFile="$swHome/sw.conf"
+configFile="$swHome/sw.conf";
 
-echo "ftpDir = $ftpDir/" >> $configFile;
+echo "ftpDir = $ftpDir/"          >> $configFile;
 echo "mailinglist = $mailinglist" >> $configFile;
-echo "min = $min" >> $configFile;
-echo "unit = $unit" >> $configFile;
+echo "min = $min"                 >> $configFile;
+echo "unit = $unit"               >> $configFile;
 echo "messaging = $messagingFreq" >> $configFile;
-echo "mailtime = $mailtime" >> $configFile;
-echo "loginName = $login" >> $configFile;
-echo "loginPassword = $password" >> $configFile;
-echo ""
+echo "mailtime = $mailtime"       >> $configFile;
+echo "mailday = $mailday"         >> $configFile;
+echo "loginName = $login"         >> $configFile;
+echo "loginPassword = $password"  >> $configFile;
+echo "";
 
 
-echo "SpaceWatch is now ready to use."
+echo "SpaceWatch is now ready to use.";
 
 
 #FTP-Installation:
@@ -90,24 +97,24 @@ then
     echo "Installing ProFTP...";
     apt-get -y install proftpd-basic;
 
-    echo ""
+    echo "";
 
     echo "Configuring ProFTP...";
 
-    file=/etc/proftpd/proftpd.conf
-    echo "DefaultRoot ~" >> $file;
+    file=/etc/proftpd/proftpd.conf;
+    echo "DefaultRoot ~"                                           >> $file;
     echo "AuthOrder              mod_auth_file.c  mod_auth_unix.c" >> $file;
-    echo "AuthUserFile /etc/proftpd/ftpd.passwd" >> $file;
-    echo "AuthPAM off" >> $file;
-    echo "RequireValidShell off" >> $file;
+    echo "AuthUserFile /etc/proftpd/ftpd.passwd"                   >> $file;
+    echo "AuthPAM off"                                             >> $file;
+    echo "RequireValidShell off"                                   >> $file;
 
 
     echo "Creating user for FTP-Access...";
     echo "Enter a user name( Required for login ): ";
     read userName;
     cd /etc/proftpd/;
-    uid=$( id www-data -u )
-    gid=$( id www-data -g )
+    uid=$( id www-data -u );
+    gid=$( id www-data -g );
 
     ftpasswd --passwd --name $userName --uid $uid --home $ftpDir --shell /bin/false;
     chmod g+s $ftpDir;
@@ -119,13 +126,14 @@ then
     /etc/init.d/proftpd restart;
 
     echo "FTP-Server ready to use.";
-    ip=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
-    echo "Try to call ftp://$ip from your browser and see the directory SpcWtch/."
+    ip=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/');
+    echo "Try to call ftp://$ip from your browser and see the directory SpcWtch/.";
 fi
 
 echo "";
-echo "Setup finished."
+echo "Setup finished.";
 echo "";
 echo "If you want SpaceWatch to automatically start with";
 echo "the server run 'sudo crontab -e' and add the line '@reboot /usr/local/SpcWtch/sw.py'";
 echo "to the end of the file.";
+

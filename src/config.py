@@ -35,9 +35,18 @@ def readConfig():
         if timeInt < 0 or timeInt > 23:
             d[ "mailtime" ] = "18"
             print( "Error in config file detected. Setting mailtime to 18" )
-    if not isInt( d[ "mailtime" ] ):
+    else:
         d[ "mailtime" ] = "18"
         print( "Error in config file detected. Setting mailtime to 18" )
+
+    if isInt( d[ "mailday" ] ):
+        dayInt = int( d[ "mailday" ] )
+        if dayInt < 0 or dayInt > 7:
+            d[ "mailday" ] = "0"
+            print( "Error in config file detected. Setting mailday to 0" )
+    else:
+        d[ "mailday" ] = "0"
+        print( "Error in config file detected. Setting mailday to 0" )
 
 
     return d

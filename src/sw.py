@@ -26,6 +26,7 @@ mailingList   = d[ "mailinglist" ]
 minSpcAvail   = int( d[ "min" ] ) # In Bytes ( 5.000.000B = 5Mb )
 unit          = d[ "unit" ]
 messaging     = d[ "messaging" ]
+mailday       = d[ "mailday" ]
 mailtime      = int( d[ "mailtime" ] )
 loginName     = d[ "loginName" ]
 loginPassword = d[ "loginPassword" ]
@@ -145,6 +146,7 @@ try:
         log( "..............New cycle.............." )
         cycles += 1
         actHour = int( time.strftime( "%H" ) )
+        actDay  = int( time.strftime( "%w" ) )
 
         # Critical
         spcAvail = getSpcAvail()
@@ -171,7 +173,7 @@ try:
         if messaging == "d" and actHour >= mailtime and actHour < (mailtime + 1):
             message = statMessageTemp % ("Daily", statData )
             sendEmail( message, subjectStat )
-        if messaging == "w" and cycles == WEEK:
+        if messaging == "w" and actDay == mailday and actHour >= mailtime and acthour < (mailtime + 1):
             message = statMessageTemp % ("Weekly", statData)
             sendEmail( message, subjectStat )
 
