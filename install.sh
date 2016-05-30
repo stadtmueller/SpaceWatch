@@ -43,18 +43,23 @@ echo "Configuring sw...";
 echo "Enter minimum available size in Bytes:";
 read min;
 
+echo "Enter the unit used to display stats in logfile( kB( 1000 ) or K( 1024 ) ): ";
+read unit;
+
 echo "Enter a list of mail addresses that have to be notified when running out of space:";
 echo "Seperate with ','";
 read mailinglist;
 
-echo "Enter the unit used to display stats in logfile( kB( 1000 ) or K( 1024 ) ): ";
-read unit;
-
-echo "Enter messaging frequency( d for daily; w for weekly; n for never ): ";
+echo "Enter messaging frequency for statistics( d for daily; w for weekly; n for never ):";
 read messagingFreq;
 
-echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
-read mailtime;
+if [ $messagingFreq -ne "n" ]
+then
+    echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
+    read mailtime;
+else
+    mailtime=0;
+fi
 
 echo "Enter email login: ";
 read login;
