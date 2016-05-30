@@ -32,7 +32,7 @@ mkdir $logPath;
 mkdir $swHome;
 
 echo "Copy Files...";
-cp src/clearLog.py $swHome;
+cp src/truncateLog.sh $swHome;
 cp src/config.py $swHome;
 cp src/sw.py $swHome;
 cp src/sw.conf $swHome;
@@ -40,7 +40,7 @@ touch "$logPath/mesg.txt";
 
 echo "Configuring sw...";
 
-echo "Enter minimum available size:";
+echo "Enter minimum available size in Bytes:";
 read min;
 
 echo "Enter a list of mail addresses that have to be notified when running out of space:";
