@@ -41,7 +41,7 @@ avg             = 0
 cycles          = 0
 statData        = ""
 messageTemp     = "SpaceWatch: Reached minimum value of free space!\n" \
-                  "Available space: %s" + unit + ".\n\n" \
+                  "Available space: %s.\n\n" \
                   "Only %d pictures can be taken."
 statMessageTemp = "SpaceWatch: %s stats\n" \
                   "Here are your stats:\n" \
@@ -96,8 +96,8 @@ def getAvgFileSize():
                 totalSize += os.path.getsize( os.path.join( root, filename ) )
 
     log( "Days uploading: %d." % dirCount )
-    log( "Total data size: %f%s." % (convert( totalSize ), unit) )
-    log( "Daily throughput: %f%s." % ((convert(totalSize) / dirCount), unit ) )
+    log( "Total data size: %s." % convert( totalSize ) )
+    log( "Daily throughput: %s." % (convert(totalSize) / dirCount) )
     log( "Pictures taken: %d." % totalCount )
     log( "Pictures per day: %d." % (totalCount / dirCount) )
 
@@ -110,20 +110,20 @@ def convert( byte ):
         return 0
 
     if unit == "K":
-        return byte / 1024
+        return str( byte / 1024 ) + unit
     elif unit == "kB":
-        return byte / 1000
+        return str( byte / 1000 ) + unit
     elif unit == "M":
-        return byte / 1024 / 1024
+        return str( byte / 1024 / 1024 ) + unit
     elif unit == "mB":
-        return byte / 1000 / 1000
+        return str( byte / 1000 / 1000 ) + unit
     elif unit == "G":
-        return byte / 1024 / 1024 / 1024
+        return str( byte / 1024 / 1024 / 1024 ) + unit
     elif unit == "gB":
-        return byte / 1000 / 1000 / 1000
+        return str( byte / 1000 / 1000 / 1000 ) + unit
     else:
         log( "Unknown unit. Going on with K." )
-        return unit / 1024
+        return str( unit / 1024 ) + "K"
 
 def log( msg ):
     global statData
@@ -151,8 +151,8 @@ try:
         spcAvail = getSpcAvail()
         avg = getAvgFileSize()
         log( "Cycle number: %d" % cycles )
-        log( "Free disk space: %f%s." % (convert( spcAvail ), unit) )
-        log( "New average picture size: %f%s." % (convert( avg ), unit) )
+        log( "Free disk space: %s." % convert( spcAvail ) )
+        log( "New average picture size: %s." % convert( avg ) )
         log( "Pictures could be taken: %d." % (spcAvail / avg) )
 
         if( spcAvail < minSpcAvail ):
