@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 
 def isInt( txt ):
     try: 
@@ -11,7 +11,7 @@ def readConfig():
     d = {}
     with open( "/usr/local/SpcWtch/sw.conf", "r" ) as configFile:
         for line in configFile:
-            if not line.rstrip() or line.rstrip()[0] == '#': # Skip empty lines and lines
+            if not line.rstrip() or line.rstrip()[0] == '#': # Skip empty lines and
                 continue                                     # lines starting with '#'
 
             seperatorPos = line.find( '=' )
