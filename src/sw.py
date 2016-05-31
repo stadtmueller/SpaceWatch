@@ -1,7 +1,6 @@
 #! /usr/bin/python3
 
 import os
-import re
 import time
 import smtplib
 
@@ -104,7 +103,7 @@ def getAvgFileSize():
 
     return totalSize / totalCount
 
-def convert( byte, digitsOnly=False ):
+def convert( byte ):
     byte = float( byte )
 
     if byte == 0:
@@ -127,9 +126,6 @@ def convert( byte, digitsOnly=False ):
     else:
         log( "Unknown unit. Going on with K." )
         conv = str( byte / 1024 ) + "K"
-
-    if( digitsOnly ):
-        return int( re.sub( "[^0-9]", "", conv ) )
 
     return conv
 
