@@ -111,7 +111,16 @@ def convert( byte ):
 
     conv = 0
 
-    if unit == "K":
+    if unit == "auto":
+        if byte >= 1000000000:
+            return str( byte / 1024 / 1024 / 1024 ) + "G"
+        elif byte >= 1000000:
+            return str( byte / 1024 / 1024 ) + "M"
+        elif byte >= 1024:
+            return str( byte / 1024 ) + "K"
+        else:
+            return str( byte ) + "B"
+    elif unit == "K":
         conv = str( byte / 1024 ) + unit
     elif unit == "kB":
         conv = str( byte / 1000 ) + unit
