@@ -58,7 +58,8 @@ case $messagingFreq in
     "n") mailtime=0; 
 	 mailday=0; ;;
     "d") echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
-         read mailtime; ;;
+         read mailtime;
+	 mailday=0; ;;
     "w") echo "Enter the day the stat mail will be send at( number between 0 and 7 ): ";
          read mailday;
 	 echo "Enter the time the stat mail will be send at( number between 0 and 23 ): ";
