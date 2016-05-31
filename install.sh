@@ -44,7 +44,7 @@ echo "Configuring sw...";
 echo "Enter minimum available size in Bytes:";
 read min;
 
-echo "Enter the unit used to display stats in logfile( kB( 1000 ) or K( 1024 ) ): ";
+echo "Enter the unit used to display stats in logfile( kB, K, mB, M, gB, G, auto ): ";
 read unit;
 
 echo "Enter a list of mail addresses that have to be notified when running out of space:";

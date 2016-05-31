@@ -109,34 +109,30 @@ def convert( byte ):
     if byte == 0:
         return 0
 
-    conv = 0
-
     if unit == "auto":
-        if byte >= 1000000000:
+        if byte >= 1073741824:
             return str( byte / 1024 / 1024 / 1024 ) + "G"
-        elif byte >= 1000000:
+        elif byte >= 1048576:
             return str( byte / 1024 / 1024 ) + "M"
         elif byte >= 1024:
             return str( byte / 1024 ) + "K"
         else:
             return str( byte ) + "B"
     elif unit == "K":
-        conv = str( byte / 1024 ) + unit
+        return str( byte / 1024 ) + unit
     elif unit == "kB":
-        conv = str( byte / 1000 ) + unit
+        return str( byte / 1000 ) + unit
     elif unit == "M":
-        conv = str( byte / 1024 / 1024 ) + unit
+        return str( byte / 1024 / 1024 ) + unit
     elif unit == "mB":
-        conv = str( byte / 1000 / 1000 ) + unit
+        return str( byte / 1000 / 1000 ) + unit
     elif unit == "G":
-        conv = str( byte / 1024 / 1024 / 1024 ) + unit
+        return str( byte / 1024 / 1024 / 1024 ) + unit
     elif unit == "gB":
-        conv = str( byte / 1000 / 1000 / 1000 ) + unit
+        return str( byte / 1000 / 1000 / 1000 ) + unit
     else:
         log( "Unknown unit. Going on with K." )
-        conv = str( byte / 1024 ) + "K"
-
-    return conv
+        return str( byte / 1024 ) + "K"
 
 def log( msg ):
     global statData
