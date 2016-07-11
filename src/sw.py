@@ -5,6 +5,7 @@ import time
 import smtplib
 
 import config
+import Scheduler
 
 #----------------------------------------------------------------------
 
@@ -43,7 +44,7 @@ statData        = ""
 messageTemp     = "SpaceWatch: Reached minimum value of free space!\n" \
                   "Available space: %s.\n\n" \
                   "Only %d pictures can be taken."
-statMessageTemp = "SpaceWatch: %s stats\n" \
+statMessageTemp = "SpaceWatch: Stats\n" \
                   "Here are your stats:\n" \
                   "%s\n\n"
 subjectNorm     = "SpaceWatch: No space available"
@@ -151,6 +152,10 @@ def log( msg ):
 try:
     log( "Starting with PID: " + pid )
     print( "Starting with PID: " + pid )
+
+    mailSched = Scheduler.MailScheduler( messaging, sendEmail )
+    mailSched.setTimeContent( mailtime, mailday )
+
     while availableSpace:
         log( "..............New cycle.............." )
         cycles += 1
@@ -177,12 +182,8 @@ try:
             logFile.close()
             exit( 0 )
 
-        if messaging == "d" and actHour >= mailtime and actHour < (mailtime + 1):
-            message = statMessageTemp % ("Daily", statData )
-            sendEmail( message, subjectStat )
-        if messaging == "w" and actDay == mailday and actHour >= mailtime and acthour < (mailtime + 1):
-            message = statMessageTemp % ("Weekly", statData)
-            sendEmail( message, subjectStat )
+        mailSched.setMailContent( statMessageTemp % ( statData ), subjectStat )
+        mailSched.performAction()
 
         time.sleep( 1800 ) # Sleep half an hour
         statData = ""
